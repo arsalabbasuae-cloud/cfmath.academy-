@@ -1,0 +1,1433 @@
+<!DOCTYPE html> 
+<head> 
+
+<!--metas-->
+	<B style="text-align:center;">In the name of Allah, the Most Gracious, the Most Merciful</B> <br> 
+
+meta name="viewport" content ="width=device-width, initial-scale=1.0"> <br> 
+meta name="discription" content ="a math website designed for math student to learn and be a professional."> 
+
+<!--stylesheets---->
+   <footer>
+   </div> 
+  <div class="Copyright"> 
+  <p align="center">Copyright &copy; 2025-2026 cfmaths.com</p> 
+  </div>
+  </footer> 
+ 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Practice Lab</title>
+  <style>
+    :root {
+      --bg: #0f172a;           /* slate-900 */
+      --bg-soft: #0b1329;      /* slightly darker */
+      --card: #111827;         /* gray-900 */
+      --muted: #94a3b8;        /* slate-400 */
+      --text: #e5e7eb;         /* gray-200 */
+      --brand: #22d3ee;        /* cyan-400 */
+      --brand-2: #a78bfa;      /* violet-400 */
+      --ok: #34d399;           /* emerald-400 */
+      --warn: #fb7185;         /* rose-400 */
+      --focus: #fcd34d;        /* amber-300 */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.15), transparent 60%),
+        radial-gradient(1200px 600px at 110% -10%, rgba(167,139,250,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg-soft), var(--bg));
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(15,23,42,.8), rgba(15,23,42,.35));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 24px; }
+
+    .title {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .logo {
+      width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px;
+      background: conic-gradient(from 200deg, var(--brand), var(--brand-2));
+      color: #0b1020; font-weight: 900; box-shadow: 0 10px 30px rgba(34,211,238,.25);
+    }
+    .title h1 { margin: 0; font-size: 26px; letter-spacing: .3px; }
+    .subtitle { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+
+    .grid {
+      display: grid; gap: 16px; grid-template-columns: 1.1fr 2fr; align-items: start;
+    }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 16px; padding: 18px 18px 16px; box-shadow: 0 8px 30px rgba(0,0,0,.25);
+    }
+
+    .card h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: .3px; }
+    .row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .row-3 { display: grid; gap: 12px; grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 600px) { .row, .row-3 { grid-template-columns: 1fr; } }
+
+    label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 6px; }
+    select, input[type="number"], input[type="text"] {
+      width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.12);
+      background: rgba(2,6,23,.6); color: var(--text); outline: none; transition: border .2s, box-shadow .2s;
+    }
+    select:focus, input:focus { border-color: var(--brand); box-shadow: 0 0 0 4px rgba(34,211,238,.12); }
+
+    .btn {
+      appearance: none; border: none; cursor: pointer; padding: 12px 16px; border-radius: 12px; font-weight: 600;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2)); color: #0c1022; box-shadow: 0 8px 24px rgba(34,211,238,.25);
+      transition: transform .06s ease, filter .2s ease; user-select: none;
+    }
+    .btn:hover { filter: brightness(1.05); }
+    .btn:active { transform: translateY(1px); }
+    .btn.secondary { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,.18); box-shadow: none; }
+    .btn.ghost { background: transparent; color: var(--muted); border: none; padding: 8px 10px; }
+
+    .question {
+      display: grid; gap: 14px; text-align: center; padding: 20px; border-radius: 16px;
+      background: radial-gradient(600px 220px at 50% 0%, rgba(34,211,238,.08), transparent 70%),
+                  linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .equation { font-size: clamp(28px, 4.5vw, 46px); letter-spacing: .6px; }
+
+    .status {
+      display: grid; gap: 10px; grid-template-columns: repeat(4, 1fr);
+      text-align: center; margin-top: 14px;
+    }
+    .pill { padding: 10px; border-radius: 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); }
+    .pill small { display: block; color: var(--muted); font-size: 12px; }
+    .pill strong { font-size: 18px; }
+
+    .progress { height: 10px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; margin-top: 12px; }
+    .bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); transition: width .25s ease; }
+
+    .feedback { min-height: 28px; text-align: center; font-weight: 600; letter-spacing: .3px; }
+    .ok { color: var(--ok); }
+    .err { color: var(--warn); }
+
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(255,255,255,.12); }
+
+    footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px 0 40px; }
+    a { color: var(--brand); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="title">
+        <div class="logo" aria-hidden="true">∑</div>
+        <div>
+          <h1>Math Practice Lab</h1>
+          <p class="subtitle">A tiny website to drill addition, subtraction, multiplication, and division — fast and fun ✨</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="app">
+    <div class="grid">
+      <!-- Controls -->
+      <section class="card" aria-labelledby="controls-title">
+        <h2 id="controls-title">Setup</h2>
+        <div class="row">
+          <div>
+            <label for="op">Operation</label>
+            <select id="op">
+              <option value="mix">Mixed (all)</option>
+              <option value="+">Addition (+)</option>
+              <option value="-">Subtraction (-)</option>
+              <option value="*">Multiplication (×)</option>
+              <option value="/">Division (÷)</option>
+            </select>
+          </div>
+          <div>
+            <label for="diff">Difficulty</label>
+            <select id="diff">
+              <option value="easy">Easy (0–10)</option>
+              <option value="med">Medium (0–20)</option>
+              <option value="hard">Hard (0–100)</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-3" style="margin-top:12px;">
+          <div>
+            <label for="count">Questions</label>
+            <select id="count">
+              <option>5</option>
+              <option selected>10</option>
+              <option>15</option>
+              <option>20</option>
+            </select>
+          </div>
+          <div>
+            <label for="timer">Timer</label>
+            <select id="timer">
+              <option value="off" selected>No timer</option>
+              <option value="60">60s</option>
+              <option value="120">120s</option>
+            </select>
+          </div>
+          <div>
+            <label for="name">Player name (optional)</label>
+            <input id="name" type="text" placeholder="e.g., Arsal" />
+          </div>
+        </div>
+        <div style="display:flex; gap:10px; margin-top:16px;">
+          <button class="btn" id="start">Start Practice</button>
+          <button class="btn secondary" id="reset">Reset</button>
+        </div>
+        <p style="margin-top:10px; color:var(--muted); font-size:13px;">
+          Tip: Press <span class="kbd">Enter</span> to submit and <span class="kbd">N</span> for next.
+        </p>
+      </section>
+
+      <!-- Game Panel -->
+      <section class="card" aria-labelledby="game-title">
+        <h2 id="game-title">Practice</h2>
+        <div class="question" aria-live="polite">
+          <div class="equation" id="eq">Click <strong>Start Practice</strong> to begin.</div>
+          <div style="display:flex; justify-content:center; gap:10px;">
+            <label for="ans" class="visually-hidden">Your answer</label>
+            <input id="ans" type="number" inputmode="numeric" placeholder="Answer" disabled />
+            <button class="btn" id="submit" disabled>Submit</button>
+            <button class="btn secondary" id="next" disabled>Next</button>
+          </div>
+          <div class="feedback" id="fb" aria-live="polite"></div>
+          <div class="progress" aria-label="Progress"><div class="bar" id="bar"></div></div>
+        </div>
+
+        <div class="status" style="margin-top:16px;">
+          <div class="pill"><small>Q#</small><strong id="qnum">0</strong></div>
+          <div class="pill"><small>Score</small><strong id="score">0</strong></div>
+          <div class="pill"><small>Streak</small><strong id="streak">0</strong></div>
+          <div class="pill"><small>Time</small><strong id="time">—</strong></div>
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:10px; justify-content:space-between; align-items:center;">
+          <div>
+            <button class="btn ghost" id="hintBtn" disabled>Hint</button>
+            <button class="btn ghost" id="revealBtn" disabled>Reveal</button>
+          </div>
+          <div style="font-size:13px; color:var(--muted);">
+            Best score: <span id="best">0</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Results -->
+    <section class="card" style="margin-top:16px; display:none;" id="results">
+      <h2>Results</h2>
+      <p id="summary"></p>
+      <div id="history" style="display:grid; gap:8px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));"></div>
+      <div style="margin-top:12px; display:flex; gap:10px;">
+        <button class="btn" id="retry">Try Again</button>
+        <button class="btn secondary" id="share">Copy Share Text</button>
+      </div>
+    </section>
+
+    <footer>
+      Built with ❤ for students & teachers. Save this file as <strong>index.html</strong> and open in any browser.
+    </footer>
+  </main>
+
+  <script>
+    // Utility helpers
+    const $ = (s) => document.querySelector(s);
+    const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
+    const rng = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const store = {
+      get k() { return 'mathlab.best'; },
+      read() { return Number(localStorage.getItem(this.k) || 0); },
+      write(v) { localStorage.setItem(this.k, String(v)); }
+    }
+
+    // Elements
+    const els = {
+      op: $('#op'), diff: $('#diff'), count: $('#count'), timer: $('#timer'), name: $('#name'),
+      start: $('#start'), reset: $('#reset'), ans: $('#ans'), submit: $('#submit'), next: $('#next'),
+      eq: $('#eq'), fb: $('#fb'), bar: $('#bar'), qnum: $('#qnum'), score: $('#score'), streak: $('#streak'), time: $('#time'),
+      hintBtn: $('#hintBtn'), revealBtn: $('#revealBtn'), best: $('#best'),
+      results: $('#results'), summary: $('#summary'), history: $('#history'), retry: $('#retry'), share: $('#share')
+    };
+
+    // State
+    const state = {
+      running: false,
+      total: 10,
+      qIndex: 0,
+      correct: 0,
+      streak: 0,
+      current: null, // {a,b,op,answer}
+      startedAt: 0,
+      timeLeft: 0,
+      timerId: null,
+      history: []
+    };
+
+    // Difficulty ranges
+    const ranges = {
+      easy: [0, 10],
+      med: [0, 20],
+      hard: [0, 100]
+    };
+
+    function newProblem(opMode, diffKey) {
+      const [lo, hi] = ranges[diffKey] || ranges.easy;
+      const pickOp = () => opMode === 'mix' ? ['+','-','*','/'][rng(0,3)] : opMode;
+      const op = pickOp();
+      let a = rng(lo, hi), b = rng(lo, hi);
+
+      // Tweak for nicer division problems (no remainders)
+      if (op === '/') {
+        b = rng(Math.max(1, lo), Math.max(1, hi));
+        const mult = rng(lo, hi);
+        a = b * mult;
+      }
+
+      // Avoid negatives for easy/med subtraction
+      if (op === '-' && (diffKey !== 'hard') && a < b) [a,b] = [b,a];
+
+      const answer = compute(a, b, op);
+      return { a, b, op, answer };
+    }
+
+    function compute(a,b,op) {
+      switch(op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return Math.floor(a / b); // exact because of generation rule
+      }
+    }
+
+    function renderProblem(p) {
+      els.eq.innerHTML = `<span aria-label="first number">${p.a}</span> <strong>${symbol(p.op)}</strong> <span aria-label="second number">${p.b}</span> = ?`;
+      els.ans.value = '';
+      els.ans.focus();
+      els.fb.textContent = '';
+      els.hintBtn.disabled = false;
+      els.revealBtn.disabled = false;
+      updateHUD();
+    }
+
+    function symbol(op){ return op === '*' ? '×' : (op === '/' ? '÷' : op); }
+
+    function updateHUD() {
+      els.qnum.textContent = `${state.qIndex}/${state.total}`;
+      els.score.textContent = state.correct;
+      els.streak.textContent = state.streak;
+      const pct = state.total ? (state.qIndex / state.total) * 100 : 0;
+      els.bar.style.width = pct + '%';
+    }
+
+    function start() {
+      if (state.running) return;
+      state.running = true;
+      state.total = Number(els.count.value);
+      state.qIndex = 0; state.correct = 0; state.streak = 0; state.history = [];
+      state.startedAt = Date.now();
+      const t = els.timer.value;
+      state.timeLeft = t === 'off' ? 0 : Number(t);
+      if (state.timerId) clearInterval(state.timerId);
+      if (state.timeLeft > 0) {
+        els.time.textContent = fmtTime(state.timeLeft);
+        state.timerId = setInterval(() => {
+          state.timeLeft = Math.max(0, state.timeLeft - 1);
+          els.time.textContent = fmtTime(state.timeLeft);
+          if (state.timeLeft === 0) finish();
+        }, 1000);
+      } else {
+        els.time.textContent = '—';
+      }
+
+      toggleGame(true);
+      nextProblem();
+    }
+
+    function toggleGame(on) {
+      els.ans.disabled = !on; els.submit.disabled = !on; els.next.disabled = !on;
+      els.hintBtn.disabled = !on; els.revealBtn.disabled = !on;
+      els.start.disabled = on; els.reset.disabled = !on;
+      els.results.style.display = 'none';
+    }
+
+    function nextProblem() {
+      if (!state.running) return;
+      if (state.qIndex >= state.total) { finish(); return; }
+      state.qIndex++;
+      state.current = newProblem(els.op.value, els.diff.value);
+      renderProblem(state.current);
+    }
+
+    function submit() {
+      if (!state.running) return;
+      const user = Number(els.ans.value.trim());
+      if (Number.isNaN(user)) { els.fb.innerHTML = '<span class="err">Enter a number</span>'; return; }
+      const p = state.current;
+      const ok = user === p.answer;
+      state.streak = ok ? state.streak + 1 : 0;
+      state.correct += ok ? 1 : 0;
+      const msg = ok ? `✅ Correct! ${p.a} ${symbol(p.op)} ${p.b} = ${p.answer}`
+                     : `❌ Not quite. ${p.a} ${symbol(p.op)} ${p.b} = <strong>${p.answer}</strong>`;
+      els.fb.innerHTML = ok ? `<span class="ok">${msg}</span>` : `<span class="err">${msg}</span>`;
+      state.history.push({ ...p, user, ok });
+      updateHUD();
+    }
+
+    function finish() {
+      state.running = false;
+      clearInterval(state.timerId);
+      toggleGame(false);
+      const elapsed = Math.round((Date.now() - state.startedAt) / 1000);
+      const pct = Math.round((state.correct / state.total) * 100);
+      const player = els.name.value.trim() || 'Player';
+      els.summary.textContent = `${player}, you answered ${state.correct}/${state.total} correctly (${pct}%) in ${fmtTime(elapsed)}.`;
+
+      // Best score stored as simple percent
+      const best = store.read();
+      if (pct > best) store.write(pct);
+      els.best.textContent = String(store.read());
+
+      // Render history
+      els.history.innerHTML = state.history.map(h => `
+        <div class="pill" style="text-align:left">
+          <div style="display:flex; justify-content:space-between;">
+            <strong>${h.a} ${symbol(h.op)} ${h.b}</strong>
+            <span>${h.ok ? '✅' : '❌'}</span>
+          </div>
+          <small>Your answer: ${h.user} • Correct: ${h.answer}</small>
+        </div>
+      `).join('');
+
+      els.results.style.display = 'block';
+    }
+
+    function giveHint() {
+      const { a, b, op } = state.current || {};
+      if (!op) return;
+      let hint = '';
+      if (op === '+') hint = `Try breaking numbers: (${a} = ${Math.floor(a/10)*10} + ${a%10}).`;
+      if (op === '-') hint = `Think: how much to add to ${b} to reach ${a}?`;
+      if (op === '*') hint = `Use groups: ${a} × ${b} = ${a} × (${b-1}) + ${a}.`;
+      if (op === '/') hint = `How many ${b}'s fit into ${a}?`;
+      els.fb.innerHTML = `<span class="ok">💡 ${hint}</span>`;
+    }
+
+    function reveal() {
+      const p = state.current; if (!p) return;
+      els.fb.innerHTML = `📘 The answer is <strong>${p.answer}</strong>. Try the next one!`;
+    }
+
+    function fmtTime(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(1,'0');
+      const s = (sec % 60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    function reset() {
+      clearInterval(state.timerId);
+      Object.assign(state, { running:false, total:Number(els.count.value), qIndex:0, correct:0, streak:0, current:null, timeLeft:0, history:[] });
+      els.eq.innerHTML = 'Click <strong>Start Practice</strong> to begin.';
+      els.ans.value=''; els.fb.textContent=''; els.bar.style.width='0%';
+      els.qnum.textContent='0'; els.score.textContent='0'; els.streak.textContent='0'; els.time.textContent='—';
+      els.results.style.display='none';
+      els.start.disabled=false; els.reset.disabled=true; els.ans.disabled=true; els.submit.disabled=true; els.next.disabled=true; els.hintBtn.disabled=true; els.revealBtn.disabled=true;
+    }
+
+    function copyShare() {
+      const player = els.name.value.trim() || 'Player';
+      const pct = Math.round((state.correct / state.total) * 100);
+      const text = `${player} scored ${state.correct}/${state.total} (${pct}%) in Math Practice Lab!`;
+      navigator.clipboard?.writeText(text);
+      els.share.textContent = 'Copied!';
+      setTimeout(() => els.share.textContent = 'Copy Share Text', 1500);
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !els.submit.disabled) submit();
+      if ((e.key === 'n' || e.key === 'N') && !els.next.disabled) nextProblem();
+    });
+
+    // Wire
+    els.start.addEventListener('click', start);
+    els.reset.addEventListener('click', reset);
+    els.submit.addEventListener('click', submit);
+    els.next.addEventListener('click', nextProblem);
+    els.hintBtn.addEventListener('click', giveHint);
+    els.revealBtn.addEventListener('click', reveal);
+    els.retry.addEventListener('click', () => { reset(); start(); });
+    els.share.addEventListener('click', copyShare);
+
+    // Initialize
+    els.best.textContent = String(store.read());
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Math Learning</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4a90e2, #50e3c2);
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+  }
+  h1 { margin-bottom: 10px; }
+  #menu, #game { max-width: 500px; margin: 20px auto; }
+  select, input, button {
+    padding: 10px 15px; border: none; border-radius: 8px;
+    font-size: 16px;
+  }
+  button { background: #fff; color: #333; cursor: pointer; margin-top: 10px; }
+  button:hover { background: #333; color: #fff; }
+  .question-box {
+    background: rgba(255,255,255,0.15);
+    padding: 20px; border-radius: 12px;
+    margin-top: 20px; font-size: 28px; font-weight: bold;
+  }
+  .scoreboard {
+    display: flex; justify-content: space-between;
+    margin-top: 15px; font-size: 16px;
+  }
+  .progress {
+    height: 10px; background: rgba(255,255,255,0.4);
+    border-radius: 10px; margin-top: 10px;
+  }
+  .bar {
+    height: 10px; width: 0%;
+    background: #fff; border-radius: 10px;
+    transition: width 0.3s;
+  }
+  input[type="number"] { width: 100px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>🧮 Math Learning Website</h1>
+
+<div id="menu">
+  <p>Select operation and number of questions:</p>
+  <select id="operation">
+    <option value="+">Addition (+)</option>
+    <option value="-">Subtraction (-)</option>
+    <option value="*">Multiplication (×)</option>
+    <option value="/">Division (÷)</option>
+  </select>
+  <select id="total">
+    <option value="5">5 Questions</option>
+    <option value="10" selected>10 Questions</option>
+    <option value="15">15 Questions</option>
+  </select>
+  <button onclick="startGame()">Start</button>
+</div>
+
+<div id="game" style="display:none;">
+  <div class="question-box" id="question">Question will appear here</div>
+  <input type="number" id="answer" placeholder="Your answer">
+  <button onclick="checkAnswer()">Submit</button>
+  <div id="feedback"></div>
+
+  <div class="progress"><div class="bar" id="bar"></div></div>
+
+  <div class="scoreboard">
+    <div>✅ Correct: <span id="correct">0</span></div>
+    <div>❌ Wrong: <span id="wrong">0</span></div>
+    <div>⏱️ Time: <span id="timer">0s</span></div>
+  </div>
+</div>
+
+<script>
+let op, total, current = 0, correct = 0, wrong = 0, answer, time = 0, timerInterval;
+
+function startGame() {
+  op = document.getElementById("operation").value;
+  total = Number(document.getElementById("total").value);
+  current = correct = wrong = 0;
+  document.getElementById("menu").style.display = "none";
+  document.getElementById("game").style.display = "block";
+  nextQuestion();
+  timerInterval = setInterval(()=> {
+    time++;
+    document.getElementById("timer").textContent = time + "s";
+  }, 1000);
+}
+
+function nextQuestion() {
+  if (current === total) return endGame();
+  current++;
+  const a = Math.floor(Math.random()*10)+1;
+  const b = Math.floor(Math.random()*10)+1;
+  answer = calculate(a,b,op);
+  document.getElementById("question").textContent = `${a} ${op} ${b} = ?`;
+  document.getElementById("answer").value = "";
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("bar").style.width = (current/total)*100 + "%";
+}
+
+function calculate(a,b,op){
+  switch(op){
+    case '+': return a+b;
+    case '-': return a-b;
+    case '*': return a*b;
+    case '/': return Math.floor(a/b);
+  }
+}
+
+function checkAnswer(){
+  const user = Number(document.getElementById("answer").value);
+  const fb = document.getElementById("feedback");
+  if(user === answer){
+    correct++;
+    fb.textContent = "✅ Correct!";
+  } else {
+    wrong++;
+    fb.textContent = `❌ Wrong! Answer was ${answer}`;
+  }
+  document.getElementById("correct").textContent = correct;
+  document.getElementById("wrong").textContent = wrong;
+  setTimeout(nextQuestion, 700);
+}
+
+function endGame(){
+  clearInterval(timerInterval);
+  document.getElementById("game").innerHTML = `
+    <h2>🎉 Game Over!</h2>
+    <p>You got ${correct} out of ${total} correct.</p>
+    <p>Total Time: ${time}s</p>
+    <button onclick="location.reload()">Play Again</button>`;
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math & Fraction Practice</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0093E9, #80D0C7);
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+  }
+  h1 { margin-bottom: 10px; }
+  select, button, input {
+    padding: 10px 15px; border: none; border-radius: 8px; font-size: 16px;
+  }
+  button {
+    background: #fff; color: #333; cursor: pointer; margin-top: 10px;
+  }
+  button:hover { background: #333; color: #fff; }
+  .question-box {
+    background: rgba(255,255,255,0.15);
+    padding: 20px; border-radius: 12px;
+    margin-top: 20px; font-size: 28px; font-weight: bold;
+  }
+  .scoreboard {
+    display: flex; justify-content: space-between;
+    margin-top: 15px; font-size: 16px;
+  }
+  .progress { height: 10px; background: rgba(255,255,255,0.4);
+    border-radius: 10px; margin-top: 10px; }
+  .bar { height: 10px; width: 0%; background: #fff;
+    border-radius: 10px; transition: width 0.3s; }
+  input[type="text"] { width: 120px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>🧮 Math & Fraction Practice</h1>
+
+<div id="menu">
+  <p>Select operation type and mode:</p>
+  <select id="operation">
+    <option value="+">Addition (+)</option>
+    <option value="-">Subtraction (-)</option>
+    <option value="*">Multiplication (×)</option>
+    <option value="/">Division (÷)</option>
+  </select>
+  <select id="mode">
+    <option value="whole">Whole Numbers</option>
+    <option value="fraction">Fractions</option>
+  </select>
+  <select id="total">
+    <option value="5">5 Questions</option>
+    <option value="10" selected>10 Questions</option>
+    <option value="15">15 Questions</option>
+  </select>
+  <button onclick="startGame()">Start</button>
+</div>
+
+<div id="game" style="display:none;">
+  <div class="question-box" id="question">Question will appear here</div>
+  <input type="text" id="answer" placeholder="Your answer (e.g. 3/4)">
+  <button onclick="checkAnswer()">Submit</button>
+  <div id="feedback"></div>
+
+  <div class="progress"><div class="bar" id="bar"></div></div>
+
+  <div class="scoreboard">
+    <div>✅ Correct: <span id="correct">0</span></div>
+    <div>❌ Wrong: <span id="wrong">0</span></div>
+    <div>⏱️ Time: <span id="timer">0s</span></div>
+  </div>
+</div>
+
+<script>
+let op, total, mode, current=0, correct=0, wrong=0, answer, time=0, timerInterval;
+
+function startGame() {
+  op = document.getElementById("operation").value;
+  mode = document.getElementById("mode").value;
+  total = Number(document.getElementById("total").value);
+  current = correct = wrong = time = 0;
+
+  document.getElementById("menu").style.display = "none";
+  document.getElementById("game").style.display = "block";
+  nextQuestion();
+
+  timerInterval = setInterval(()=> {
+    time++;
+    document.getElementById("timer").textContent = time + "s";
+  },1000);
+}
+
+function nextQuestion() {
+  if (current === total) return endGame();
+  current++;
+
+  let questionText;
+  if (mode === "whole") {
+    const a = rand(1,10), b = rand(1,10);
+    answer = calc(a,b,op);
+    questionText = `${a} ${op} ${b} = ?`;
+  } else {
+    // Fractions
+    const a1 = rand(1,5), a2 = rand(1,5);
+    const b1 = rand(1,5), b2 = rand(1,5);
+    questionText = `${a1}/${a2} ${op} ${b1}/${b2} = ?`;
+    answer = fractionCalc(a1,a2,b1,b2,op);
+  }
+
+  document.getElementById("question").textContent = questionText;
+  document.getElementById("answer").value = "";
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("bar").style.width = (current/total)*100 + "%";
+}
+
+function calc(a,b,op){
+  switch(op){
+    case '+': return a+b;
+    case '-': return a-b;
+    case '*': return a*b;
+    case '/': return (a/b).toFixed(2);
+  }
+}
+
+function fractionCalc(a1,a2,b1,b2,op){
+  let n=0, d=0;
+  switch(op){
+    case '+': n = a1*b2 + b1*a2; d = a2*b2; break;
+    case '-': n = a1*b2 - b1*a2; d = a2*b2; break;
+    case '*': n = a1*b1; d = a2*b2; break;
+    case '/': n = a1*b2; d*
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math + Fractions + Roman Numbers Practice</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+  }
+  h1 { margin-bottom: 10px; }
+  select, button, input {
+    padding: 10px 15px; border: none; border-radius: 8px; font-size: 16px;
+  }
+  button { background: #fff; color: #333; cursor: pointer; margin-top: 10px; }
+  button:hover { background: #333; color: #fff; }
+  .question-box {
+    background: rgba(255,255,255,0.15);
+    padding: 20px; border-radius: 12px;
+    margin-top: 20px; font-size: 28px; font-weight: bold;
+  }
+  .scoreboard {
+    display: flex; justify-content: space-between;
+    margin-top: 15px; font-size: 16px;
+  }
+  .progress {
+    height: 10px; background: rgba(255,255,255,0.4);
+    border-radius: 10px; margin-top: 10px;
+  }
+  .bar {
+    height: 10px; width: 0%;
+    background: #fff; border-radius: 10px;
+    transition: width 0.3s;
+  }
+  input[type="text"] { width: 120px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>🧮 Math, Fractions & Roman Practice</h1>
+
+<div id="menu">
+  <p>Select operation and mode:</p>
+  <select id="operation">
+    <option value="+">Addition (+)</option>
+    <option value="-">Subtraction (-)</option>
+    <option value="*">Multiplication (×)</option>
+    <option value="/">Division (÷)</option>
+  </select>
+  <select id="mode">
+    <option value="whole">Whole Numbers</option>
+    <option value="fraction">Fractions</option>
+    <option value="roman">Roman Numbers</option>
+  </select>
+  <select id="total">
+    <option value="5">5 Questions</option>
+    <option value="10" selected>10 Questions</option>
+    <option value="15">15 Questions</option>
+  </select>
+  <button onclick="startGame()">Start</button>
+</div>
+
+<div id="game" style="display:none;">
+  <div class="question-box" id="question">Question will appear here</div>
+  <input type="text" id="answer" placeholder="Your answer">
+  <button onclick="checkAnswer()">Submit</button>
+  <div id="feedback"></div>
+
+  <div class="progress"><div class="bar" id="bar"></div></div>
+
+  <div class="scoreboard">
+    <div>✅ Correct: <span id="correct">0</span></div>
+    <div>❌ Wrong: <span id="wrong">0</span></div>
+    <div>⏱️ Time: <span id="timer">0s</span></div>
+  </div>
+</div>
+
+<script>
+let op, total, mode, current=0, correct=0, wrong=0, answer, time=0, timerInterval;
+
+function startGame() {
+  op = document.getElementById("operation").value;
+  mode = document.getElementById("mode").value;
+  total = Number(document.getElementById("total").value);
+  current = correct = wrong = t
+V + VI = ?   →  Answer: XI
+IX × II = ?  →  Answer: XVIII
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Math: Whole • Fractions • Roman (Fixed)</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:0;background:linear-gradient(135deg,#3a7bd5,#00d2ff);color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{width:100%;max-width:820px;background:rgba(255,255,255,0.06);border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  h1{margin:0 0 10px;font-size:20px}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  select,input,button{padding:10px;border-radius:8px;border:0;font-size:15px}
+  button{cursor:pointer}
+  .question{background:rgba(255,255,255,0.04);padding:18px;border-radius:10px;text-align:center;font-size:22px;font-weight:600;margin-bottom:10px}
+  .status{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+  .progress{height:10px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden;margin-top:10px}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,#ffd54a,#ff8a65);transition:width .25s}
+  #feedback{min-height:24px;margin-top:8px}
+  .small{font-size:13px;color:rgba(255,255,255,0.8)}
+  .footer{margin-top:14px;font-size:13px;color:rgba(255,255,255,0.75)}
+  @media (max-width:600px){.controls{flex-direction:column}}
+</style>
+</head>
+<body>
+  <div class="card" role="main">
+    <h1>Math Practice — Whole • Fractions • Roman (Fixed)</h1>
+
+    <div class="controls">
+      <label class="small">Operation
+        <select id="operation">
+          <option value="+">Addition (+)</option>
+          <option value="-">Subtraction (-)</option>
+          <option value="*">Multiplication (×)</option>
+          <option value="/">Division (÷)</option>
+        </select>
+      </label>
+
+      <label class="small">Mode
+        <select id="mode">
+          <option value="whole">Whole Numbers</option>
+          <option value="fraction">Fractions</option>
+          <option value="roman">Roman Numbers (answer in Roman)</option>
+        </select>
+      </label>
+
+      <label class="small">Questions
+        <select id="total">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+        </select>
+      </label>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="startBtn">Start</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div id="gameArea" style="display:none">
+      <div class="question" id="question">Press Start</div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input id="answer" type="text" placeholder="Type answer (e.g., 3/4 or XI)" />
+        <button id="submitBtn">Submit</button>
+        <button id="nextBtn">Skip → Next</button>
+      </div>
+
+      <div id="feedback" class="small"></div>
+
+      <div class="progress"><div class="bar" id="bar"></div></div>
+
+      <div class="status" style="margin-top:10px">
+        <div class="small">Q: <strong id="qnum">0</strong>/<span id="totalDisplay">0</span></div>
+        <div class="small">Correct: <strong id="score">0</strong></div>
+        <div class="small">Wrong: <strong id="wrong">0</strong></div>
+        <div class="small">Time: <strong id="timer">0s</strong></div>
+      </div>
+    </div>
+
+    <div class="footer">Notes: Roman mode expects answers like <code>I, II, III, IV, V, X, XII</code>. Fractions should be in `n/d` form (auto-simplified).</div>
+  </div>
+
+<script>
+/* ---------- Helpers ---------- */
+const $ = id => document.getElementById(id);
+const rand = (min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+const gcd = (a,b)=> b===0? Math.abs(a) : gcd(b, a % b);
+
+/* ---------- Roman utilities ---------- */
+function toRoman(num) {
+  if (!Number.isInteger(num) || num <= 0) return "N"; // N sometimes used for zero; we'll treat invalid as N
+  const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+  const syms = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"];
+  let res=""; let n = num;
+  for(let i=0;i<vals.length;i++){
+    while(n>=vals[i]){ res += syms[i]; n -= vals[i]; }
+  }
+  return res;
+}
+
+/* Note: simple roman parse for validation (supports standard subtractive forms) */
+function romanToInt(s) {
+  if (!s || typeof s !== 'string') return NaN;
+  s = s.toUpperCase().trim();
+  const map = {I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+  let total=0, i=0;
+  for (; i<s.length; i++){
+    const curr = map[s[i]];
+    const next = map[s[i+1]] || 0;
+    if (!curr) return NaN;
+    if (curr < next) { total += (next - curr); i++; }
+    else total += curr;
+  }
+  return total;
+}
+
+/* fraction reduce/parse */
+function reduceFraction(n,d){
+  if(d===0) return null;
+  const g = gcd(Math.abs(n), Math.abs(d));
+  n /= g; d /= g;
+  if (d < 0) { n = -n; d = -d; }
+  return {n,d};
+}
+function parseFractionString(str){
+  // Accept "a/b" only
+  if(typeof str !== 'string') return null;
+  str = str.trim();
+  const m = /^(-?\d+)\s*\/\s*(\d+)$/.exec(str);
+  if(!m) return null;
+  const n = parseInt(m[1],10), d = parseInt(m[2],10);
+  if (d === 0) return null;
+  return reduceFraction(n,d);
+}
+
+/* ---------- App state ---------- */
+let opEl = $('operation'), modeEl = $('mode'), totalEl = $('total');
+let startBtn = $('startBtn'), resetBtn = $('resetBtn'), submitBtn = $('submitBtn'), nextBtn = $('nextBtn');
+let questionEl = $('question'), answerEl = $('answer'), feedbackEl = $('feedback');
+let qnumEl = $('qnum'), totalDisplayEl = $('totalDisplay'), scoreEl = $('score'), wrongEl = $('wrong');
+let barEl = $('bar'), timerEl = $('timer'), gameArea = $('gameArea');
+
+let total=10, current=0, score=0, wrong=0, expected=null, timer=0, timerId=null;
+
+/* ---------- Start / Reset ---------- */
+startBtn.addEventListener('click', startGame);
+resetBtn.addEventListener('click', resetAll);
+submitBtn.addEventListener('click', submitAnswer);
+nextBtn.addEventListener('click', skipQuestion);
+
+function startGame(){
+  total = Number(totalEl.value);
+  current = 0; score = 0; wrong = 0; expected = null;
+  $('totalDisplay').textContent = total;
+  qnumEl.textContent = '0'; scoreEl.textContent = '0'; wrongEl.textContent = '0';
+  timer = 0; timerEl.textContent = '0s';
+  gameArea.style.display = 'block';
+  answerEl.value = '';
+  feedbackEl.textContent = '';
+  if(timerId) clearInterval(timerId);
+  timerId = setInterval(()=>{ timer++; timerEl.textContent = timer + 's'; }, 1000);
+  nextQuestion();
+}
+
+function resetAll(){
+  if(timerId) clearInterval(timerId);
+  gameArea.style.display = 'none';
+  questionEl.textContent = 'Press Start';
+  qnumEl.textContent = '0'; scoreEl.textContent = '0'; wrongEl.textContent = '0';
+  barEl.style.width = '0%';
+  answerEl.value = '';
+  feedbackEl.textContent = '';
+  timer = 0; timerEl.textContent = '0s';
+}
+
+/* ---------- Question generation ---------- */
+function nextQuestion(){
+  if (current >= total) return finishGame();
+  current++;
+  qnumEl.textContent = current;
+  barEl.style.width = (current / total * 100) + '%';
+  feedbackEl.textContent = '';
+  answerEl.value = '';
+  const mode = modeEl.value;
+  const op = opEl.value;
+
+  if (mode === 'whole'){
+    // simple whole numbers (safe)
+    const a = rand(1,20), b = rand(1,20);
+    if (op === '/') {
+      // make divisible: choose divisor b then multiplier m
+      const m = rand(1,10);
+      const bb = rand(1,12);
+      expected = Math.floor((bb * m) / bb); // m
+      // to show a number pair that yields integer division:
+      questionEl.textContent = `${bb * m} ${op} ${bb} = ? (integer result)`;
+      expected = m;
+    } else if (op === '-' ){
+      // ensure positive result
+      let x = rand(1,30), y = rand(1,30);
+      if (x <= y) [x,y] = [y+1,x]; // x>y
+      expected = calc(x,y,op);
+      questionEl.textContent = `${x} ${op} ${y} = ?`;
+    } else {
+      expected = calc(a,b,op);
+      questionEl.textContent = `${a} ${op} ${b} = ?`;
+    }
+  }
+  else if (mode === 'fraction'){
+    // generate random fractions with denominators 1..12, simplify answer
+    const a1 = rand(1,9), a2 = rand(1,12);
+    const b1 = rand(1,9), b2 = rand(1,12);
+    // compute result as fraction
+    const res = fractionCalc(a1,a2,b1,b2,op);
+    expected = `${res.n}/${res.d}`;
+    questionEl.textContent = `${a1}/${a2} ${op} ${b1}/${b2} = ?  (give answer as n/d)`;
+  }
+  else if (mode === 'roman'){
+    // generate pairs so result is positive integer and reasonably sized
+    // We'll keep numbers within 1..399 for products/adds to avoid huge roman strings
+    let a,b,res;
+    if (op === '+'){
+      a = rand(1,399); b = rand(1,399);
+      // cap sum to <= 3999 (safe); but we keep small for readability
+      res = a + b;
+      expected = toRoman(res);
+      questionEl.textContent = `${toRoman(a)} ${op} ${toRoman(b)} = ?  (answer in Roman)`;
+    } else if (op === '-'){
+      // ensure positive result >=1
+      a = rand(2,400); b = rand(1,a-1);
+      res = a - b;
+      if (res < 1) res = 1;
+      expected = toRoman(res);
+      questionEl.textContent = `${toRoman(a)} ${op} ${toRoman(b)} = ?  (answer in Roman)`;
+    } else if (op === '*'){
+      // choose small multipliers to keep product manageable
+      a = rand(1,50);
+      // ensure product <= 3999
+      b = rand(1, Math.max(1, Math.floor(3999 / a)));
+      res = a * b;
+      expected = toRoman(res);
+      questionEl.textContent = `${toRoman(a)} ${op} ${toRoman(b)} = ?  (answer in Roman)`;
+    } else if (op === '/'){
+      // make exact division: choose divisor b and quotient q then a = b*q
+      b = rand(1,50);
+      const q = rand(1,40);
+      a = b * q;
+      res = q;
+      expected = toRoman(res);
+      questionEl.textContent = `${toRoman(a)} ${op} ${toRoman(b)} = ?  (answer in Roman)`;
+    }
+  } else {
+    questionEl.textContent = 'Unknown mode';
+    expected = null;
+  }
+}
+
+/* ---------- Calculations ---------- */
+function calc(a,b,op){
+  switch(op){
+    case '+': return a + b;
+    case '-': return a - b;
+    case '*': return a * b;
+    case '/': return Math.floor(a / b);
+    default: return NaN;
+  }
+}
+
+function fractionCalc(a1,a2,b1,b2,op){
+  let n=0,d=1;
+  switch(op){
+    case '+': n = a1*b2 + b1*a2; d = a2*b2; break;
+    case '-': n = a1*b2 - b1*a2; d = a2*b2; break;
+    case '*': n = a1*b1; d = a2*b2; break;
+    case '/': 
+      if (b1 === 0) { n = 0; d = 1; }
+      else { n = a1 * b2; d = a2 * b1; }
+      break;
+    default: n = 0; d = 1;
+  }
+  const r = reduceFraction(n,d);
+  if(!r) return {n:0,d:1};
+  return r;
+}
+
+/* ---------- Submit / Check ---------- */
+function normalizeRomanInput(s){
+  if(!s) return '';
+  return s.toUpperCase().replace(/[^IVXLCDM]/g,'').trim();
+}
+
+function submitAnswer(){
+  const userRaw = answerEl.value.trim();
+  const mode = modeEl.value;
+  if (expected === null) { feedbackEl.textContent = 'No expected answer — start again.'; return; }
+
+  let correctFlag = false;
+  if (mode === 'roman'){
+    const userNorm = normalizeRomanInput(userRaw);
+    const expNorm = String(expected).toUpperCase();
+    correctFlag = (userNorm === expNorm);
+  } else if (mode === 'fraction'){
+    const parsed = parseFractionString(userRaw);
+    if (!parsed){ correctFlag = false; }
+    else {
+      const expectedParts = expected.split('/');
+      const en = Number(expectedParts[0]), ed = Number(expectedParts[1]);
+      correctFlag = (parsed.n === en && parsed.d === ed);
+    }
+  } else { // whole
+    const num = Number(userRaw);
+    if (Number.isNaN(num)) correctFlag = false;
+    else correctFlag = (Number(expected) === num);
+  }
+
+  if (correctFlag){
+    score++; scoreEl.textContent = score;
+    feedbackEl.textContent = '✅ Correct!';
+  } else {
+    wrong++; wrongEl.textContent = wrong;
+    feedbackEl.textContent = `❌ Wrong — correct answer: ${expected}`;
+  }
+
+  // small delay then next or finish
+  setTimeout(()=>{
+    if (current >= total) finishGame();
+    else nextQuestion();
+  }, 800);
+}
+
+function skipQuestion(){
+  wrong++; wrongEl.textContent = wrong;
+  feedbackEl.textContent = `Skipped — correct answer was: ${expected}`;
+  setTimeout(()=> {
+    if (current >= total) finishGame();
+    else nextQuestion();
+  }, 800);
+}
+
+/* ---------- Finish ---------- */
+function finishGame(){
+  if (timerId) clearInterval(timerId);
+  questionEl.textContent = '🎉 Finished';
+  feedbackEl.innerHTML = `<strong>Result:</strong> ${score}/${total} correct • ${wrong} wrong • Time: ${timer}s`;
+  // keep the summary visible and allow restart via Reset button
+}
+
+/* ---------- Keyboard ---------- */
+answerEl.addEventListener('keydown', e=>{
+  if (e.key === 'Enter') submitAnswer();
+});
+
+/* initialize display */
+resetAll();
+</script>
+</body>
+</html>
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
